@@ -24,17 +24,17 @@ class SearchPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val position = params.key ?: SHOPAPP_STARTING_PAGE_INDEX
-        val apiQuery = query
+        val queryData = query
         return try {
-            val response = service.searchItems(apiQuery, position)
-            val repos = response.searchResult?.records ?: listOf()
-            val nextKey = if (repos.isEmpty()) {
+            val response = service.searchItems(queryData, position)
+            val articlesList = response.searchResult?.records ?: listOf()
+            val nextKey = if (articlesList.isEmpty()) {
                 null
             } else {
                 position + (params.loadSize / NETWORK_PAGE_SIZE)
             }
             LoadResult.Page(
-                data = repos,
+                data = articlesList,
                 prevKey = if (position == SHOPAPP_STARTING_PAGE_INDEX) null else position - 1,
                 nextKey = nextKey
             )

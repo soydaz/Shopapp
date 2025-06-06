@@ -2,7 +2,6 @@ package com.example.shoppapp.modules.main.ui.components
 
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.scan
@@ -11,7 +10,6 @@ enum class RemotePresentationState {
     INITIAL, REMOTE_LOADING, SOURCE_LOADING, PRESENTED
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Flow<CombinedLoadStates>.asRemotePresentationState(): Flow<RemotePresentationState> =
     scan(RemotePresentationState.INITIAL) { state, loadState ->
         when (state) {
@@ -32,5 +30,4 @@ fun Flow<CombinedLoadStates>.asRemotePresentationState(): Flow<RemotePresentatio
                 else -> state
             }
         }
-    }
-        .distinctUntilChanged()
+    }.distinctUntilChanged()

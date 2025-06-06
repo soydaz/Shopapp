@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppapp.R
 import com.example.shoppapp.databinding.SearchLoadStateFooterViewItemBinding
 
-class SearchLoadStateViewHolder(
-    private val mBinding: SearchLoadStateFooterViewItemBinding,
-    retry: () -> Unit
-) : RecyclerView.ViewHolder(mBinding.root){
+class SearchLoadStateViewHolder(private val mBinding: SearchLoadStateFooterViewItemBinding, retry: () -> Unit) : RecyclerView.ViewHolder(mBinding.root){
 
     init {
         mBinding.retryButton.setOnClickListener {

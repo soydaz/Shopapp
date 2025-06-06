@@ -7,11 +7,10 @@
         android:paddingVertical="@dimen/_8dp"
         android:paddingEnd="@dimen/_4dp"
         android:paddingStart="@dimen/_0dp">
-        <ImageView
+        <com.example.shoppapp.common.ui.imageview.CircleImageView
             android:id="@+id/color"
             android:layout_width="@dimen/_20dp"
             android:layout_height="@dimen/_20dp"
-            android:background="@color/pink"
             tools:ignore="ContentDescription" />
     </LinearLayout>
 </layout>

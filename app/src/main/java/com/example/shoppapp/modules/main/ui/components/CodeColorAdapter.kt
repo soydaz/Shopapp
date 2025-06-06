@@ -1,5 +1,6 @@
 package com.example.shoppapp.modules.main.ui.components
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class CodeColorAdapter(private val mColorsList: List<VariantColor>): RecyclerVie
         holder.bind(variant)
     }
 
-    class ItemViewHolder(val mBinding: ItemColorViewholderBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class ItemViewHolder(private val mBinding: ItemColorViewholderBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
         companion object {
             fun from(parent: ViewGroup) = ItemViewHolder(
@@ -33,7 +34,7 @@ class CodeColorAdapter(private val mColorsList: List<VariantColor>): RecyclerVie
             if (variantColor.colorHex.isNullOrEmpty()) {
                 mBinding.color.visibility = View.GONE
             } else {
-                mBinding.color.setBackgroundColor(variantColor.colorHex.toColorInt())
+                mBinding.color.backgroundTintList = ColorStateList.valueOf(variantColor.colorHex.toColorInt())
             }
             mBinding.executePendingBindings()
         }

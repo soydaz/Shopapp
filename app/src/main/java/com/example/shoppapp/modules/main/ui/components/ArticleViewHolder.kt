@@ -8,15 +8,16 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.shoppapp.R
 import com.example.shoppapp.databinding.ArticleViewholderBinding
 import com.example.shoppapp.modules.main.domain.model.Article
+import com.example.shoppapp.utils.FormatTextUtils
 
 class ArticleViewHolder(private val mBinding: ArticleViewholderBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
     fun bind(product: Article) {
         mBinding.apply {
             mBinding.title.text = product.productDisplayName
-            mBinding.price.text = product.listPrice.toString()
+            mBinding.price.text = FormatTextUtils.getMoneyFormat(product.listPrice ?: 0.0)
             mBinding.price.paintFlags = mBinding.price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            mBinding.discountedPrice.text = product.promoPrice.toString()
+            mBinding.discountedPrice.text = FormatTextUtils.getMoneyFormat(product.promoPrice ?: 0.0)
 
             product.image?.let { url ->
                 Glide.with(mBinding.imageItem.context)

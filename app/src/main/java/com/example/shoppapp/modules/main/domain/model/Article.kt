@@ -3,13 +3,13 @@ package com.example.shoppapp.modules.main.domain.model
 import com.google.gson.annotations.SerializedName
 
 data class Article(
-    @field:SerializedName("id") val id: Int,
-    @field:SerializedName("productId") val productId: String?,
-    @field:SerializedName("productDisplayName") val productDisplayName: String?,
-    @field:SerializedName("listPrice") val listPrice: Double?,
-    @field:SerializedName("promoPrice") val promoPrice: Double?,
-    @field:SerializedName("smImage") val image: String?,
-    @field:SerializedName("variantsColor") val variantsColor:List<VariantColor>? = emptyList()
+    @SerializedName("id") val id: Int,
+    @SerializedName("productId") val productId: String?,
+    @SerializedName("productDisplayName") val productDisplayName: String?,
+    @SerializedName("listPrice") val listPrice: Double?,
+    @SerializedName("promoPrice") val promoPrice: Double?,
+    @SerializedName("smImage") val image: String?,
+    @SerializedName("variantsColor") val variantsColor:List<VariantColor>? = emptyList()
 )
 
 data class VariantColor(

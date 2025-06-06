@@ -2,6 +2,7 @@ package com.example.shoppapp.modules.main.ui
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppapp.R
 import com.example.shoppapp.databinding.ActivityMainBinding
@@ -42,7 +44,6 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
         mBinding.lifecycleOwner = this
 
         mBinding.actionOpenFilter.setOnClickListener {
-            //FilterSelectorDialog.newInstance(this).show(supportFragmentManager, "FilterSelectorDialog")
             Toast.makeText(this@SearchActivity, R.string.option_is_not_available, Toast.LENGTH_LONG).show()
         }
 
@@ -60,6 +61,10 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
             header = header,
             footer = ReposLoadStateAdapter { articleAdapter.retry() }
         )
+
+        mBinding.floatingActionButton.setOnClickListener {
+            mBinding.list.smoothScrollToPosition(0)
+        }
 
         mBinding.bindSearch(
             uiState = uiState,
@@ -85,6 +90,7 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
                 false
             }
         }
+
         searchBar.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 updateRepoListFromInput(onQueryChanged)
@@ -116,6 +122,25 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy != 0) onScrollChanged(UiAction.Scroll(currentQuery = uiState.value.query))
+            }
+        })
+        list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as? LinearLayoutManager
+                val firstVisible = layoutManager?.findFirstVisibleItemPosition() ?: 0
+                if (firstVisible > 10 && floatingActionButton.visibility != View.VISIBLE) {
+                    floatingActionButton.animate()
+                        .alpha(1f)
+                        .setDuration(200)
+                        .withStartAction { floatingActionButton.visibility = View.VISIBLE }
+                        .start()
+                } else if (firstVisible <= 10 && floatingActionButton.isVisible) {
+                    floatingActionButton.animate()
+                        .alpha(0f)
+                        .setDuration(200)
+                        .withEndAction { floatingActionButton.visibility = View.GONE }
+                        .start()
+                }
             }
         })
         val notLoading = repoAdapter.loadStateFlow

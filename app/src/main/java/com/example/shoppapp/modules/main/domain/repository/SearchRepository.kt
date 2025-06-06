@@ -1,6 +1,5 @@
 package com.example.shoppapp.modules.main.domain.repository
 
-import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData

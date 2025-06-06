@@ -7,4 +7,5 @@
     <string name="lower_price">Menor precio</string>
     <string name="higher_price">Mayor precio</string>
     <string name="filter_selection">Selecciona un filtro</string>
+    <string name="retry">Reintentar</string>
 </resources>

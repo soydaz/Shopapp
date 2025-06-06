@@ -10,7 +10,10 @@ import retrofit2.HttpException
 
 private const val SHOPAPP_STARTING_PAGE_INDEX = 1
 
-class SearchPagingSource(private val service: ShopappServices, private val query:String) : PagingSource<Int, Article>() {
+class SearchPagingSource(
+    private val service: ShopappServices,
+    private val query:String
+) : PagingSource<Int, Article>() {
 
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let { anchorPosition ->

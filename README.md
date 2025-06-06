@@ -6,12 +6,6 @@ Esta aplicación consume una API de Liverpool y podemos buscar artículo.
 - Buscar Producto
 - Paginación dinamica de datos
 
-![Shopapp1](https://github.com/user-attachments/assets/cad7bb8c-7b83-4616-bbd6-887cbc7cd170)
-![Shopapp2](https://github.com/user-attachments/assets/92a79fd4-793b-41c1-af53-90d995be8923)
-![Shopapp3](https://github.com/user-attachments/assets/600e2ff3-3422-4e00-8b8a-03cefc7e8326)
-
-- 
-
 ## Requisitos
 - Android Studio Meerkat Feature Drop | 2024.3.2 o superior
 - SDK 33+
@@ -25,3 +19,7 @@ Esta aplicación consume una API de Liverpool y podemos buscar artículo.
 1. Clona el repositorio
 2. Abre el proyecto en Android Studio
 3. Espera a que se sincronicen las dependencias
+
+![Shopapp4](https://github.com/user-attachments/assets/5e81bbf3-b2d5-4a73-8473-4edf95023b37)
+![Shopapp2](https://github.com/user-attachments/assets/92a79fd4-793b-41c1-af53-90d995be8923)
+![Shopapp3](https://github.com/user-attachments/assets/600e2ff3-3422-4e00-8b8a-03cefc7e8326)

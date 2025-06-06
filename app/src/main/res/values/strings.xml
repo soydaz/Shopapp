@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Shoppapp</string>
+    <string name="icon_action_filter">filtro</string>
+    <string name="search">Buscar por producto, categoría y más</string>
+    <string name="no_results">No se encontró ningún resultado, intenta con otro artículo</string>
+    <string name="redefined">Predefinida</string>
+    <string name="lower_price">Menor precio</string>
+    <string name="higher_price">Mayor precio</string>
+    <string name="filter_selection">Selecciona un filtro</string>
 </resources>

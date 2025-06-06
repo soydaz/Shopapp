@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+
+        <TextView
+            android:id="@+id/layout_picture_title"
+            style="@style/Theme.Shoppapp.title"
+            android:text="@string/filter_selection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.9"
+            android:gravity="start"
+            android:layout_marginTop="@dimen/_20dp"/>
+
+        <TextView
+            android:id="@+id/action_filter_low_price"
+            style="@style/Theme.Shoppapp.text"
+            android:text="@string/lower_price"
+            app:layout_constraintEnd_toEndOf="@+id/action_filter_default"
+            app:layout_constraintStart_toStartOf="@+id/action_filter_default"
+            app:layout_constraintTop_toBottomOf="@+id/action_filter_default" />
+
+        <TextView
+            android:id="@+id/action_filter_default"
+            style="@style/Theme.Shoppapp.text"
+            android:text="@string/redefined"
+            app:layout_constraintEnd_toEndOf="@id/layout_picture_title"
+            app:layout_constraintStart_toStartOf="@id/layout_picture_title"
+            app:layout_constraintTop_toBottomOf="@id/layout_picture_title" />
+
+        <TextView
+            android:id="@+id/action_filter_higher_price"
+            style="@style/Theme.Shoppapp.text"
+            android:text="@string/higher_price"
+            app:layout_constraintEnd_toEndOf="@id/action_filter_low_price"
+            app:layout_constraintStart_toStartOf="@id/action_filter_low_price"
+            app:layout_constraintTop_toBottomOf="@id/action_filter_low_price" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -42,7 +42,8 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
         mBinding.lifecycleOwner = this
 
         mBinding.actionOpenFilter.setOnClickListener {
-            FilterSelectorDialog.newInstance(this).show(supportFragmentManager, "FilterSelectorDialog")
+            //FilterSelectorDialog.newInstance(this).show(supportFragmentManager, "FilterSelectorDialog")
+            Toast.makeText(this@SearchActivity, R.string.option_is_not_available, Toast.LENGTH_LONG).show()
         }
 
         bindState(
@@ -52,11 +53,7 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
         )
     }
 
-    private fun bindState(
-        uiState: StateFlow<UiState>,
-        pagingData: Flow<PagingData<UiModel>>,
-        uiActions: (UiAction) -> Unit
-    ) {
+    private fun bindState(uiState: StateFlow<UiState>, pagingData: Flow<PagingData<UiModel>>, uiActions: (UiAction) -> Unit) {
         val articleAdapter = ArticleAdapter()
         val header = ReposLoadStateAdapter { articleAdapter.retry() }
         mBinding.list.adapter = articleAdapter.withLoadStateHeaderAndFooter(
@@ -79,10 +76,7 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
 
     }
 
-    private fun ActivityMainBinding.bindSearch(
-        uiState: StateFlow<UiState>,
-        onQueryChanged: (UiAction.Search) -> Unit
-    ) {
+    private fun ActivityMainBinding.bindSearch(uiState: StateFlow<UiState>, onQueryChanged: (UiAction.Search) -> Unit) {
         searchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
                 updateRepoListFromInput(onQueryChanged)

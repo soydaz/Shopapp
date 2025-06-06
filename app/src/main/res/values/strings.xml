@@ -8,4 +8,5 @@
     <string name="higher_price">Mayor precio</string>
     <string name="filter_selection">Selecciona un filtro</string>
     <string name="retry">Reintentar</string>
+    <string name="option_is_not_available">Esta opción no está disponible</string>
 </resources>

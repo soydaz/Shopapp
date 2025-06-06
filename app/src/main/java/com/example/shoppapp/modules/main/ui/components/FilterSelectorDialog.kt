@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class FilterSelectorDialog(private val listener: OnItemClickListener) : BottomSheetDialogFragment() {
 
-    lateinit var mBinding: LayoutFilterSelectionBinding
+    private lateinit var mBinding: LayoutFilterSelectionBinding
 
     companion object {
         @JvmStatic

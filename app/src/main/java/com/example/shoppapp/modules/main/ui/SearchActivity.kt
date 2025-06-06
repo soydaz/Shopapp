@@ -42,7 +42,7 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
         mBinding.lifecycleOwner = this
 
         mBinding.actionOpenFilter.setOnClickListener {
-            FilterSelectorDialog(this).show(supportFragmentManager, "FilterSelectorDialog")
+            FilterSelectorDialog.newInstance(this).show(supportFragmentManager, "FilterSelectorDialog")
         }
 
         bindState(
@@ -117,13 +117,7 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
         }
     }
 
-    private fun ActivityMainBinding.bindList(
-        header: ReposLoadStateAdapter,
-        repoAdapter: ArticleAdapter,
-        uiState: StateFlow<UiState>,
-        pagingData: Flow<PagingData<UiModel>>,
-        onScrollChanged: (UiAction.Scroll) -> Unit
-    ) {
+    private fun ActivityMainBinding.bindList(header: ReposLoadStateAdapter, repoAdapter: ArticleAdapter, uiState: StateFlow<UiState>, pagingData: Flow<PagingData<UiModel>>, onScrollChanged: (UiAction.Scroll) -> Unit) {
         retryButton.setOnClickListener { repoAdapter.retry() }
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -138,12 +132,7 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
             .map { it.hasNotScrolledForCurrentSearch }
             .distinctUntilChanged()
 
-        val shouldScrollToTop = combine(
-            notLoading,
-            hasNotScrolledForCurrentSearch,
-            Boolean::and
-        )
-            .distinctUntilChanged()
+        val shouldScrollToTop = combine(notLoading, hasNotScrolledForCurrentSearch, Boolean::and).distinctUntilChanged()
 
         lifecycleScope.launch {
             pagingData.collectLatest(repoAdapter::submitData)
@@ -165,18 +154,14 @@ class SearchActivity : AppCompatActivity(), FilterSelectorDialog.OnItemClickList
                 val isListEmpty = loadState.refresh is LoadState.NotLoading && repoAdapter.itemCount == 0
                 emptyList.isVisible = isListEmpty
                 list.isVisible =  loadState.source.refresh is LoadState.NotLoading || loadState.mediator?.refresh is LoadState.NotLoading
-                loading.isVisible = loadState.mediator?.refresh is LoadState.Loading
-                retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error && repoAdapter.itemCount == 0
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                retryButton.isVisible = loadState.source.refresh is LoadState.Error && repoAdapter.itemCount == 0
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
                     ?: loadState.prepend as? LoadState.Error
                 errorState?.let {
-                    Toast.makeText(
-                        this@SearchActivity,
-                        "\uD83D\uDE28 Wooops ${it.error}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@SearchActivity, "${it.error}", Toast.LENGTH_LONG).show()
                 }
             }
         }
